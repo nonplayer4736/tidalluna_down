@@ -1,0 +1,11 @@
+[
+  {
+    "id": "tidal-batch-downloader",
+    "name": "Tidal Batch Downloader",
+    "description": "실시간 다운로드 진행률 및 재생목록 일괄 다운로드를 지원하는 플러그인입니다.",
+    "author": "Antigravity",
+    "version": "1.0.0",
+    "repo": "https://github.com/nonplayer4736/tidalluna_down",
+    "branch": "main"
+  }
+]
