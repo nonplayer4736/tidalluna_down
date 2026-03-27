@@ -1,3 +1,9 @@
+/**
+ * @name Tidal Batch Downloader
+ * @author Antigravity
+ * @version 1.0.0
+ * @description 재생목록 일괄 다운로드 커스텀 플러그인
+ */
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
@@ -239,11 +245,19 @@ export function load() {
     // 1. CSS 인젝트 (웹팩/해시가 아닌 순수 플러그인을 가정)
     const styleEl = document.createElement('style');
     styleEl.id = 'tbd-custom-style';
-    try {
-        const cssContent = fs.readFileSync(path.join(__dirname, 'style.css'), 'utf-8');
-        styleEl.innerHTML = cssContent;
-        document.head.appendChild(styleEl);
-    } catch(e) { console.error("CSS Load Error:", e); }
+    styleEl.innerHTML = `
+#tidal-batch-queue-widget { position: fixed; bottom: 30px; right: 30px; width: 320px; background-color: #121212; border: 1px solid #333; border-radius: 8px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6); z-index: 99999; color: #fff; font-family: 'Inter', -apple-system, sans-serif; display: none; flex-direction: column; overflow: hidden; }
+#tidal-batch-queue-header { background-color: #000; padding: 12px 16px; font-weight: 600; font-size: 14px; border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center; }
+#tidal-batch-queue-body { padding: 16px; }
+.tbd-track-info { font-size: 13px; margin-bottom: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #e1e1e1; }
+.tbd-progress-container { width: 100%; height: 8px; background-color: #333; border-radius: 4px; overflow: hidden; margin-bottom: 8px; }
+.tbd-progress-bar { height: 100%; background-color: #00FFFF; width: 0%; transition: width 0.2s ease-out; }
+.tbd-stats { display: flex; justify-content: space-between; font-size: 12px; color: #999; }
+.tbd-queue-list { margin-top: 14px; border-top: 1px solid #333; padding-top: 10px; font-size: 12px; color: #888; max-height: 120px; overflow-y: auto; }
+.tbd-queue-item { padding: 4px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tbd-download-btn { background-color: rgba(0, 255, 255, 0.1); color: #00FFFF; border: 1px solid #00FFFF; border-radius: 6px; padding: 8px 16px; font-size: 13px; font-weight: 500; cursor: pointer; margin-left: 16px; transition: all 0.2s ease-in-out; display: flex; align-items: center; }
+.tbd-download-btn:hover { background-color: rgba(0, 255, 255, 0.2); box-shadow: 0 0 10px rgba(0, 255, 255, 0.3); }`;
+    document.head.appendChild(styleEl);
 
     // 2. 백엔드 매니저 초기화
     batchDownloader = new TidalBatchDownloader();
