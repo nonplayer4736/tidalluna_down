@@ -1,0 +1,8 @@
+{
+  "name": "Tidal Batch Downloader",
+  "description": "일괄 다운로드 관리 기능을 제공하는 Tidaluna 플러그인. (다운로드 대기열, 속도측정 지원)",
+  "author": "Antigravity",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {}
+}
